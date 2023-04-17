@@ -1,6 +1,8 @@
 import Input from "@/components/Input";
 import { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 enum VariantEnum {
   LOGIN = "login",
@@ -10,10 +12,26 @@ enum VariantEnum {
 type VariantType = VariantEnum.LOGIN | VariantEnum.REGISTER;
 
 const Auth = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState<VariantType>(VariantEnum.LOGIN);
+
+  const login = useCallback(async () => {
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/",
+        redirect: false,
+      });
+      await router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, password, router]);
 
   const register = useCallback(async () => {
     try {
@@ -21,10 +39,11 @@ const Auth = () => {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
+      await login();
     } catch (error) {
       console.log(error);
     }
-  }, [email, password]);
+  }, [email, password, login]);
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
@@ -70,7 +89,7 @@ const Auth = () => {
               />
             </div>
             <button
-              onClick={isLogin ? () => {} : register}
+              onClick={isLogin ? login : register}
               className="mt-7 w-full rounded-md bg-red-600 py-3 text-white transition hover:bg-red-700"
             >
               {isLogin ? "Login" : "Sign up"}
