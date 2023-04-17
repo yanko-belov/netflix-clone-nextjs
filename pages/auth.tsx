@@ -3,6 +3,8 @@ import { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 enum VariantEnum {
   LOGIN = "login",
@@ -53,6 +55,26 @@ const Auth = () => {
     );
   }, []);
 
+  const gitHubLogin = useCallback(async () => {
+    try {
+      await signIn("github", {
+        callbackUrl: "/",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const googleLogin = useCallback(async () => {
+    try {
+      await signIn("google", {
+        callbackUrl: "/",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   const isLogin = useMemo(() => variant === VariantEnum.LOGIN, [variant]);
 
   return (
@@ -94,6 +116,20 @@ const Auth = () => {
             >
               {isLogin ? "Login" : "Sign up"}
             </button>
+            <div className="mt-8 flex flex-row items-center justify-center gap-4">
+              <div
+                onClick={googleLogin}
+                className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-full bg-white hover:opacity-80"
+              >
+                <FcGoogle size={30} />
+              </div>
+              <div
+                onClick={gitHubLogin}
+                className="flex h-10 w-10 transform cursor-pointer items-center justify-center rounded-full bg-white hover:opacity-80"
+              >
+                <FaGithub size={30} />
+              </div>
+            </div>
             <p className="mt-8 text-neutral-500">
               {isLogin ? "New to Netflix?" : "Already a member?"}
               <span

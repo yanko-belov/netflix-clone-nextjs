@@ -2,6 +2,10 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import db from "@/lib/prisma-db";
 import { compare } from "bcrypt";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 export default NextAuth({
   pages: {
@@ -12,6 +16,7 @@ export default NextAuth({
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  adapter: PrismaAdapter(db),
   providers: [
     Credentials({
       id: "credentials",
@@ -46,6 +51,14 @@ export default NextAuth({
 
         return user;
       },
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID || "",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
 });
