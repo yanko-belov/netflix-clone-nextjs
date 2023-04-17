@@ -2,7 +2,6 @@ import Input from "@/components/Input";
 import { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
@@ -14,8 +13,6 @@ enum VariantEnum {
 type VariantType = VariantEnum.LOGIN | VariantEnum.REGISTER;
 
 const Auth = () => {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,14 +23,12 @@ const Auth = () => {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: "/",
-        redirect: false,
+        callbackUrl: "/profiles",
       });
-      await router.push("/");
     } catch (error) {
       console.log(error);
     }
-  }, [email, password, router]);
+  }, [email, password]);
 
   const register = useCallback(async () => {
     try {
@@ -58,7 +53,7 @@ const Auth = () => {
   const gitHubLogin = useCallback(async () => {
     try {
       await signIn("github", {
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       });
     } catch (error) {
       console.log(error);
@@ -68,7 +63,7 @@ const Auth = () => {
   const googleLogin = useCallback(async () => {
     try {
       await signIn("google", {
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       });
     } catch (error) {
       console.log(error);
