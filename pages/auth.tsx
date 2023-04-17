@@ -15,6 +15,17 @@ const Auth = () => {
 
   const [variant, setVariant] = useState<VariantType>(VariantEnum.LOGIN);
 
+  const register = useCallback(async () => {
+    try {
+      await fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, password]);
+
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
       currentVariant === VariantEnum.LOGIN
@@ -58,7 +69,10 @@ const Auth = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button className="mt-7 w-full rounded-md bg-red-600 py-3 text-white transition hover:bg-red-700">
+            <button
+              onClick={isLogin ? () => {} : register}
+              className="mt-7 w-full rounded-md bg-red-600 py-3 text-white transition hover:bg-red-700"
+            >
               {isLogin ? "Login" : "Sign up"}
             </button>
             <p className="mt-8 text-neutral-500">
