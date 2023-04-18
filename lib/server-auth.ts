@@ -1,9 +1,11 @@
-import { getSession } from "next-auth/react";
-import { NextApiRequest } from "next";
+import { getServerSession } from "next-auth";
+import { NextApiRequest, NextApiResponse } from "next";
 import db from "@/lib/prisma-db";
 
-const serverAuth = async (req: NextApiRequest) => {
-  const session = await getSession({ req });
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+
+const serverAuth = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session?.user?.email) {
     throw new Error("Not authenticated");
