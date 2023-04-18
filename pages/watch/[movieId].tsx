@@ -1,26 +1,6 @@
-import { getSession } from "next-auth/react";
-import { NextPageContext } from "next";
 import { useRouter } from "next/router";
 import useMovie from "@/hooks/useMovie";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-
-// TODO: extract this into middleware
-export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}
 
 const Watch = () => {
   const router = useRouter();
