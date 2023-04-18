@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import db from "@/lib/prisma-db";
 import { compare } from "bcrypt";
@@ -7,7 +7,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-export default NextAuth({
+export const authOptions: AuthOptions = {
   pages: {
     signIn: "/auth",
   },
@@ -61,4 +61,6 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);
