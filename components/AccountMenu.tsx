@@ -11,7 +11,7 @@ const AccountMenu: FC<AccountMenuProps> = ({ visible }) => {
   }
 
   return (
-    <div className="absolute right-0 top-14 w-56 flex-col border-2 border-gray-800 bg-black py-5">
+    <div className="absolute right-0 top-8 w-56 flex-col border-2 border-gray-800 bg-black py-5 lg:top-12">
       <div className="flex flex-col gap-3">
         <div className="group/item flex w-full flex-row items-center gap-3 px-3">
           <img

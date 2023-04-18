@@ -10,7 +10,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ visible }) => {
   }
 
   return (
-    <div className="absolute left-0 top-10 flex w-56 flex-col border-2 border-gray-800 bg-black py-5">
+    <div className="absolute left-0 top-14 flex w-56 flex-col border-2 border-gray-800 bg-black py-5">
       <div className="flex flex-col gap-4">
         <div className="hover:unrerline px-3 text-center text-white">Home</div>
         <div className="hover:unrerline px-3 text-center text-white">
