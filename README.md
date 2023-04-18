@@ -28,8 +28,8 @@
 
 # About
 
-1. [ ] You can contact me at [belov.yanko@gmail.com](mailto:belov.yanko@gmail.com).
-2. [ ] 
+You can contact me at [belov.yanko@gmail.com](mailto:belov.yanko@gmail.com).
+
 ## Technologies Used
 
 This project was built using the following technologies:
