@@ -13,7 +13,6 @@ export default async function handler(
 
   try {
     await serverAuth(req);
-    const movieCount = await db.movie.count();
 
     const movies = await db.movie.findMany();
 
