@@ -3,6 +3,7 @@ import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
 import MobileMenu from "@/components/MobileMenu";
 import { useCallback, useEffect, useState } from "react";
 import AccountMenu from "@/components/AccountMenu";
+import Link from "next/link";
 
 const TOP_OFFSET = 66;
 
@@ -38,7 +39,9 @@ const Navbar = () => {
           showBackground ? `bg-zinc-900 bg-opacity-90` : ``
         }`}
       >
-        <img src="/images/logo.png" alt="logo" className="h-4 lg:h-7" />
+        <Link href={"/"}>
+          <img src="/images/logo.png" alt="logo" className="h-4 lg:h-7" />
+        </Link>
         <div className="ml-8 hidden flex-row gap-7 lg:flex">
           <NavbarItem label="Home" />
           <NavbarItem label="Series" />
