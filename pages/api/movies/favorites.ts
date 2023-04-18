@@ -26,7 +26,7 @@ export default async function handler(
       },
     });
     return res.status(200).json(movies);
-  } catch (error) {
-    return res.status(400).json(error);
+  } catch (error: any) {
+    return res.status(400).json({ message: error?.message });
   }
 }
