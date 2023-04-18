@@ -4,7 +4,7 @@ import MobileMenu from "@/components/MobileMenu";
 import { useCallback, useEffect, useState } from "react";
 import AccountMenu from "@/components/AccountMenu";
 
-const TOP_OFFST = 66;
+const TOP_OFFSET = 66;
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -23,7 +23,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowBackground(window.scrollY > TOP_OFFST);
+      setShowBackground(window.scrollY > TOP_OFFSET);
     };
 
     window.addEventListener("scroll", handleScroll);
