@@ -19,6 +19,9 @@ const FavoriteButton: FC<FavoriteButtonProps> = ({ movieId }) => {
       const response = await fetch(`/api/movies/favorite/${movieId}`, {
         method: isFavorite ? "DELETE" : "POST",
       });
+      if (!response.ok) {
+        throw response;
+      }
 
       const data = await response.json();
       await mutateCurrentUser({

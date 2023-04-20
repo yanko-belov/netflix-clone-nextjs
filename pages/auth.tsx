@@ -32,10 +32,13 @@ const Auth = () => {
 
   const register = useCallback(async () => {
     try {
-      await fetch("/api/register", {
+      const response = await fetch("/api/register", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
+      if (!response.ok) {
+        throw response;
+      }
       await login();
     } catch (error) {
       console.log(error);
